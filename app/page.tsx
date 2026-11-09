@@ -95,12 +95,8 @@ export default async function EventDetailPage() {
           <div className="grid gap-8 lg:grid-cols-2">
             <div className="overflow-hidden rounded-2xl bg-[var(--card)] ring-1 ring-[var(--border)] shadow-lg">
               <img
-                src={
-                  event.imageUrl && event.imageUrl !== "/images/placeholder-event.svg"
-                    ? event.imageUrl
-                    : PLACEHOLDER_SVG
-                }
-                alt={event.title}
+                src="/helene-bester-2.jpeg"
+                alt="Kers & Fees met Helene Bester"
                 className="h-64 w-full object-cover sm:h-80 lg:h-96"
               />
             </div>
