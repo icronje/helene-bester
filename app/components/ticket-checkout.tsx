@@ -44,7 +44,7 @@ export function TicketCheckout({ event }: TicketCheckoutProps) {
       return;
     }
     if (!email.trim() || !isValidEmail(email)) {
-      setError("Vul asseblief 'n geldige e-pos adres in.");
+      setError("Vul asseblief \x27n geldige e-pos adres in.");
       return;
     }
     if (!phone.trim()) {
@@ -101,8 +101,11 @@ export function TicketCheckout({ event }: TicketCheckoutProps) {
 
   return (
     <>
-      <button onClick={() => setOpen(true)} className="btn-wapa text-lg">
-        <Ticket className="w-5 h-5" />
+      <button
+        onClick={() => setOpen(true)}
+        className="inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-6 py-3 text-base font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+      >
+        <Ticket className="h-5 w-5" />
         Bespreek nou
       </button>
 
@@ -112,12 +115,12 @@ export function TicketCheckout({ event }: TicketCheckoutProps) {
             className="absolute inset-0 bg-black/40 backdrop-blur-sm"
             onClick={() => !isLoading && handleClose()}
           />
-          <div className="relative z-10 w-full max-w-lg max-h-[calc(100vh-2rem)] overflow-y-auto rounded-2xl bg-[var(--card)] p-6 ring-1 ring-[var(--border)] shadow-xl">
+          <div className="relative z-10 max-h-[calc(100vh-2rem)] w-full max-w-lg overflow-y-auto rounded-2xl bg-card p-8 ring-1 ring-border shadow-xl">
             <button
               type="button"
               onClick={handleClose}
               disabled={isLoading}
-              className="absolute top-3 right-3 inline-flex h-8 w-8 items-center justify-center rounded-lg text-[var(--muted-foreground)] hover:bg-[var(--secondary)] disabled:opacity-30"
+              className="absolute right-3 top-3 inline-flex h-8 w-8 items-center justify-center rounded-lg text-muted-foreground hover:bg-secondary disabled:opacity-30"
             >
               <X className="h-4 w-4" />
               <span className="sr-only">Sluit</span>
@@ -126,44 +129,49 @@ export function TicketCheckout({ event }: TicketCheckoutProps) {
             {confirmedTicket ? (
               <div className="space-y-5 py-2">
                 <div>
-                  <h2 className="text-xl font-semibold text-[var(--foreground)]">Bevestiging</h2>
-                  <p className="text-sm text-[var(--muted-foreground)]">
-                    'n Epos met verdere inligting is gestuur na {confirmedTicket.buyerEmail}.
+                  <h2 className="text-xl font-semibold text-foreground">Bevestiging</h2>
+                  <p className="text-sm text-muted-foreground">
+                    \x27n Epos met verdere inligting is gestuur na {confirmedTicket.buyerEmail}.
                   </p>
                 </div>
-                <div className="rounded-xl border border-[var(--primary)]/20 bg-[var(--primary)]/5 p-4 space-y-3">
+                <div className="space-y-3 rounded-xl border border-primary/20 bg-primary/5 p-4">
                   <div>
-                    <p className="text-sm text-[var(--muted-foreground)]">Bespreking verwysingsnommer:</p>
-                    <p className="mt-1 font-mono text-lg font-semibold text-[var(--primary)]">
+                    <p className="text-sm text-muted-foreground">Bespreking verwysingsnommer:</p>
+                    <p className="mt-1 font-mono text-lg font-semibold text-primary">
                       #{confirmedTicket.reservation_reference}
                     </p>
                   </div>
                   <div>
-                    <p className="text-sm text-[var(--muted-foreground)]">Kaartjie verwysingsnommer:</p>
-                    <p className="mt-1 font-mono text-sm font-medium text-[var(--primary)]">
+                    <p className="text-sm text-muted-foreground">Kaartjie verwysingsnommer:</p>
+                    <p className="mt-1 font-mono text-sm font-medium text-primary">
                       #{confirmedTicket.reference}
                     </p>
                   </div>
                 </div>
-                <button onClick={handleClose} className="btn-wapa">Dankie</button>
+                <button
+                  onClick={handleClose}
+                  className="inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-6 py-3 text-base font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+                >
+                  Dankie
+                </button>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-5 py-2">
                 <div>
-                  <h2 className="text-xl font-semibold text-[var(--foreground)]">
-                    Kaartjies Bespreek — {event.title}
+                  <h2 className="text-xl font-semibold text-foreground">
+                    Kies u Kaartjies — {event.title}
                   </h2>
-                  <p className="text-sm text-[var(--muted-foreground)]">
+                  <p className="text-sm text-muted-foreground">
                     Vul u besonderhede in en kies u kaartjies.
                   </p>
                 </div>
 
                 <div className="space-y-2">
-                  <h3 className="text-sm font-semibold text-[var(--foreground)]">Jou Besonderhede</h3>
+                  <h3 className="text-sm font-semibold text-foreground">Jou Besonderhede</h3>
                 </div>
                 <div className="grid gap-4 sm:grid-cols-2">
                   <div className="space-y-2">
-                    <label htmlFor="name" className="block text-sm font-medium text-[var(--foreground)]">
+                    <label htmlFor="name" className="block text-sm font-medium text-foreground">
                       Volle naam *
                     </label>
                     <input
@@ -172,11 +180,11 @@ export function TicketCheckout({ event }: TicketCheckoutProps) {
                       onChange={(e) => setName(e.target.value)}
                       placeholder="Byvoorbeeld: Jan van Wyk"
                       required
-                      className="input"
+                      className="w-full rounded-lg border border-border bg-background px-4 py-3 text-base text-foreground transition focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/12"
                     />
                   </div>
                   <div className="space-y-2">
-                    <label htmlFor="email" className="block text-sm font-medium text-[var(--foreground)]">
+                    <label htmlFor="email" className="block text-sm font-medium text-foreground">
                       E-pos *
                     </label>
                     <input
@@ -186,11 +194,11 @@ export function TicketCheckout({ event }: TicketCheckoutProps) {
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder="jan@voorbeeld.com"
                       required
-                      className="input"
+                      className="w-full rounded-lg border border-border bg-background px-4 py-3 text-base text-foreground transition focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/12"
                     />
                   </div>
                   <div className="space-y-2 sm:col-span-2">
-                    <label htmlFor="phone" className="block text-sm font-medium text-[var(--foreground)]">
+                    <label htmlFor="phone" className="block text-sm font-medium text-foreground">
                       Telefoon *
                     </label>
                     <input
@@ -200,13 +208,13 @@ export function TicketCheckout({ event }: TicketCheckoutProps) {
                       onChange={(e) => setPhone(e.target.value)}
                       placeholder="Byvoorbeeld: 082 123 4567"
                       required
-                      className="input"
+                      className="w-full rounded-lg border border-border bg-background px-4 py-3 text-base text-foreground transition focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/12"
                     />
                   </div>
                 </div>
 
                 <div className="space-y-2">
-                  <label className="block text-sm font-medium text-[var(--foreground)]">Kaartjie opsies</label>
+                  <label className="block text-sm font-medium text-foreground">Kaartjie opsies</label>
                   <TicketSelector
                     ticketTypes={event.ticketTypes}
                     selected={selected}
@@ -215,17 +223,17 @@ export function TicketCheckout({ event }: TicketCheckoutProps) {
                 </div>
 
                 {error && (
-                  <p className="text-sm font-medium text-[var(--destructive)]">{error}</p>
+                  <p className="text-sm font-medium text-destructive">{error}</p>
                 )}
 
-                <div className="flex flex-col-reverse gap-3 sm:flex-row sm:items-center sm:justify-between border-t border-[var(--border)] pt-4">
-                  <div className="text-sm font-medium text-[var(--foreground)]">
+                <div className="flex flex-col-reverse gap-3 border-t border-border pt-4 sm:flex-row sm:items-center sm:justify-between">
+                  <div className="text-sm font-medium text-foreground">
                     Totaal: {formatZAR(totalAmount)}
                   </div>
                   <button
                     type="submit"
                     disabled={isLoading || totalAmount <= 0}
-                    className="btn-wapa"
+                    className="inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-6 py-3 text-base font-medium text-primary-foreground transition-colors hover:bg-primary/90 disabled:opacity-60"
                   >
                     {isLoading ? (
                       <>
