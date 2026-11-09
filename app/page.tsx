@@ -80,7 +80,7 @@ export default async function EventDetailPage() {
 
   return (
     <div className="flex flex-1 flex-col min-h-screen">
-      <section className="relative py-12 sm:py-16 concert-pattern">
+      <section className="bg-church-pattern py-12 sm:py-16">
         <div className="nw-container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-4">
             <Link
@@ -95,7 +95,7 @@ export default async function EventDetailPage() {
           <div className="grid gap-8 lg:grid-cols-2">
             <div className="overflow-hidden rounded-2xl bg-[var(--card)] ring-1 ring-[var(--border)] shadow-lg">
               <img
-                src="/helene-bester-2.jpeg"
+                src="/helene-bester-3.jpeg"
                 alt="Kers & Fees met Helene Bester"
                 className="h-64 w-full object-cover sm:h-80 lg:h-96"
               />
@@ -136,7 +136,12 @@ export default async function EventDetailPage() {
                 </div>
               ) : hasTickets && !soldOut ? (
                 <div className="mt-6">
-                  <TicketCheckout event={event} />
+                  <TicketCheckout event={event}>
+                    <button className="inline-flex items-center justify-center gap-2 rounded-lg bg-[var(--primary)] text-[var(--primary-foreground)] px-6 py-3 text-base font-medium hover:opacity-90 transition">
+                      <Ticket className="h-5 w-5" />
+                      Bespreek nou
+                    </button>
+                  </TicketCheckout>
                 </div>
               ) : hasTickets && soldOut ? (
                 <div className="mt-6 inline-flex items-center gap-2 rounded-xl bg-[var(--destructive)]/10 px-4 py-3 text-sm font-medium text-[var(--destructive)] border border-[var(--destructive)]/20">
